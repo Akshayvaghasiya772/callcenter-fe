@@ -19,13 +19,11 @@ export function LoginForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let encrstring = btoa(email)
     const res = await nextAuthSignIn('credentials', {
       email: email,
       password: password,
       redirect: false,
     })
-    console.log(res)
     if (!res.error) {
       // successMsg('Login successfully')
       router.push('/')
@@ -33,12 +31,6 @@ export function LoginForm({
     } else {
       // errorMsg(res.error)
       console.log(res.error, 'this is error')
-      if (
-        res.error ===
-        'You have not verified your email, please go to your email to verify using the link.'
-      ) {
-        router.push('/send-verification-mail/' + encrstring)
-      }
     }
   }
 
@@ -74,7 +66,7 @@ export function LoginForm({
           </div>
           <Input id="password" onChange={(e)=>setPassword(e.target.value)}
           value={password}
-          type="password" required />
+          type="text" required />
         </div>
         <Button type="submit" className="w-full">
           Login

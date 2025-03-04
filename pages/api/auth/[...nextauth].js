@@ -1,9 +1,7 @@
 import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
-const URL = process.env.NEXT_PUBLIC_API_SERVICE_BACKEND + "user/login";
-
+const URL = process.env.NEXT_PUBLIC_API_SERVICE_BACKEND + "staff/login";
 const authOptions = {
   session: {
     strategy: "jwt",
@@ -52,7 +50,7 @@ const authOptions = {
           token: token?.user?.token,
           name: token?.user?.name,
           email: token?.user?.email,
-          role:user?.role
+          role:token?.user?.role
         };
       }
       return session;

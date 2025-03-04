@@ -1,3 +1,4 @@
+import { requireAuthentication } from '@/utils/utils';
 import React from 'react'
 
 const index = () => {
@@ -9,3 +10,11 @@ const index = () => {
 }
 
 export default index
+
+export async function getServerSideProps(context) {
+  return requireAuthentication(context, ({ session }) => {
+    return {
+      props: { session },
+    };
+  });
+}
