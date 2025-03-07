@@ -1,8 +1,10 @@
 import {useState} from "react";
 import axios from 'axios';
 import { showToast } from "./ToastComponent";
-// import { showToast } from '@/components/ToastComponent';
 const MemberForm = () => {
+
+  const [loading, setLoading] = useState(false);
+
   const [memberDetails, setMemberDetails] = useState({
     name: "",
     branch: "",
@@ -57,7 +59,7 @@ const MemberForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    setLoading(true);
     // Create FormData object
     const formData = new FormData();
   
@@ -100,17 +102,19 @@ const MemberForm = () => {
       });
       
       console.log('Response:', response.data);
-      showToast('Data submitted successfully');
+      showToast.success('Data submitted successfully');
     } catch (error) {
       console.error('Error submitting data:', error);
-      showToast('Failed to submit data');
+      showToast.error('Failed to submit data');
+    }
+    finally{
+      setLoading(false);
     }
   };
 
 
   return (
     <>
-    <button className="bg-red-600 cursor-pointer" onClick={()=>showToast.success('Data submitted successfully')}>click here</button>
     <form onSubmit={handleSubmit} className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg space-y-6">
       <h2 className="text-2xl font-bold text-center mb-6">Member Details</h2>
 
@@ -245,9 +249,18 @@ const MemberForm = () => {
         </div>
       ))}
 
-      <button type="submit" className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-        Submit
-      </button>
+      <button
+      type="submit"
+      onClick={handleSubmit}
+      className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center justify-center"
+      disabled={loading}
+    >
+      {loading ? (
+        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      ) : (
+        "Submit"
+      )}
+    </button>
     </form>
     </>
   );
