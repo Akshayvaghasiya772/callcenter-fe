@@ -1,6 +1,5 @@
-import { toast } from "@/hooks/use-toast";
 import axios from 'axios';
-
+import { showToast } from "@/components/ToastComponent";
 export const integrateGetApi = (url,stateValue,authToken) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -13,7 +12,7 @@ export const integrateGetApi = (url,stateValue,authToken) => {
     })
     .catch((error) => {
       console.log('error', error)
-      toast({
+      showToast.error({
         title:error?.response?.data?.message
       })
     })
@@ -27,7 +26,7 @@ export const integrateGetApiWithoutToken = (url,stateValue) => {
     })
     .catch((error) => {
       console.log('error', error)
-      toast({
+      showToast.error({
         title:error?.response?.data?.message
       })
     })
