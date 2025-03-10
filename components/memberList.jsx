@@ -15,8 +15,7 @@ import {StepBack, StepForward } from "lucide-react";
 import { integrateGetApi } from "@/utils/api";
 import { Tabs,TabsList,TabsTrigger } from "@/components/ui/tabs"
 import { useRouter } from "next/router";
-import { getSession, useSession } from "next-auth/react";
-import { requireAuthentication } from "@/utils/utils";
+import { useSession } from "next-auth/react";
 
 
 export default function MemberList() {
@@ -47,20 +46,6 @@ export default function MemberList() {
       console.log(activeTab,'activeTab')
     }, [activeTab])
     
-
-    // useEffect(() => {
-    //   const checkAuthentication = async () => {
-    //     const session = await getSession();
-    //     if (!session) {
-    //       router.push('/sign-in');
-    //     } else {
-    //       // Call your callback function here if needed
-    //       // cb(JSON.parse(JSON.stringify({ session })));
-    //     }
-    //   };
-    //   checkAuthentication();
-    // }, []); // The empty dependency array ensures that the effect runs only once on mount  
-
   const totalPages = data?.totalPages;
   return (
     <div className="space-y-4 p-4">
@@ -147,10 +132,3 @@ export default function MemberList() {
   );
 }
 
-export async function getServerSideProps(context) {
-  return requireAuthentication(context, ({ session }) => {
-    return {
-      props: { session },
-    };
-  });
-}

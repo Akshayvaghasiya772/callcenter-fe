@@ -10,3 +10,11 @@ return (
 }
 
 export default index
+
+export async function getServerSideProps(context) {
+  return requireAuthentication(context, ({ session }) => {
+    return {
+      props: { session },
+    };
+  });
+}

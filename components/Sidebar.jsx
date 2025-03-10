@@ -9,6 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { CircleUser } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { signOut } from "next-auth/react";
 
 export default function SideBar({children}) {
   return (
