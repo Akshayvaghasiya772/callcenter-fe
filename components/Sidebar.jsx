@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { signOut } from "next-auth/react";
 
-export default function SideBar({children}) {
+export default function SideBarComp({children}) {
   return (
     <SidebarProvider>
       <AppSidebar />

@@ -22,7 +22,7 @@
 // }
 
 // import SideBar from "@/components/SideBar";
-import SideBar from "@/components/SideBar";
+import SideBarComp from "@/components/SideBar";
 import ToastComponent from "@/components/ToastComponent";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
@@ -54,9 +54,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         {excludeSideBar ? (
           <Component {...pageProps} />
         ) : (
-          <SideBar>
+          <SideBarComp>
             <Component {...pageProps} />
-          </SideBar>
+          </SideBarComp>
         )}
       </SessionProvider>
     </>
